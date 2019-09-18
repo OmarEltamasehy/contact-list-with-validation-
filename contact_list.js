@@ -16,20 +16,27 @@ let contactList = {
                 
        
         var name = document.getElementById('name').value
-        var mail = document.getElementById('mail').value
-        var phone = document.getElementById('phone').value
+   
+        
 
 
         // set contact obj by user value
         contact.id = id;
-        contact.name = substring()//name;
-        contact.mail = mail;
-        contact.phone = phone;
+        contact.name = substring();
+        contact.mail = validateEmail();
+        contact.phone = checkPhoneAvailability();
     
         // push contact to contacts array
-        this.contacts.push(contact);
-        console.log(contactList);
-        id++;
+        if(contact.name != false || contact.mail != false || contact.phone != false ){
+            this.contacts.push(contact);
+            console.log(contactList);
+            id++;
+        }
+        else
+        {
+            alert("enter a valid data ");
+        }
+        
     },
     removeContact : function removeContact( id ){},
     editContact : function editContact (id, updateObj){},
@@ -54,37 +61,40 @@ btn.onclick = function(){
 }
 
 
+
 var getContact = document.getElementById('getContact');
 getContact.onclick = function(){
     contactList.getAllContacts();
 }
 
 
-function checkMail(){
-    
-}
 
 
 
-function validateEmail(email) 
+
+function validateEmail() 
 {
-  var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-  return re.test(email);
+    var mail = document.getElementById('mail').value
+    //var re = /\S+@\S+/;
+    var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    if ( re.test(mail) == true ) 
+        return mail
+    else 
+        alert("contact mail is not valid");
+        return false
 }
 
-//function validateEmail(email) 
-// {
-//   var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-//   return re.test(email);
-// }
 
 
 function checkPhoneAvailability(){
-   
     let phone2 = document.getElementById('phone')
-    if (phone2.value.length != 11 )
-     alert("the phone number should be 11 number")
-
+    if (phone2.value.length != 11 ){
+        alert("the phone number should be 11 number")
+        return false
+    }
+    else 
+        return phone2.value
+    
 }
 
 
@@ -102,6 +112,7 @@ function substring(){
         }
     }
     console.log("full name : " + fulName);
+    
     return fulName;
 }
 
