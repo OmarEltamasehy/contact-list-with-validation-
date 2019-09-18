@@ -3,49 +3,41 @@ let id = 1;
 
 let contactListArr = []
 
- contact = {
-    id : "",
-    name:"" ,
-    mail:"",
-    phone:""
-}
 
 
 
 let contactList = {
     
-    contactName:"",
-    contact : "",
+    "name":"",
+    "contacts" : [],
 
     addContact : function addContact(){
-
+        let contact = {};
                 
-        let name = document.getElementById('name').value
-        let mail = document.getElementById('mail').value
-        let phone = document.getElementById('phone').value
+       
+        var name = document.getElementById('name').value
+        var mail = document.getElementById('mail').value
+        var phone = document.getElementById('phone').value
 
 
         // set contact obj by user value
         contact.id = id;
-        contact.name = name;
+        contact.name = substring()//name;
         contact.mail = mail;
         contact.phone = phone;
     
-        // push contacts to contactList object then push into array 
-        contactList.contactName = contact.name ;
-        contactList.contact = contact;
-        contactListArr.push(contactList);
-        //console.log( contactListArr[0]);
-        
-        //console.log(contact);
-        console.log(contactListArr);
+        // push contact to contacts array
+        this.contacts.push(contact);
+        console.log(contactList);
         id++;
-        
     },
     removeContact : function removeContact( id ){},
     editContact : function editContact (id, updateObj){},
     getContact : function getContact (id){},
-    getAllContacts : function getAllContacts (){},
+    getAllContacts : function getAllContacts (){
+        console.log(this.contacts);
+        return this.contacts
+    },
 }
 
 
@@ -56,10 +48,63 @@ let contactList = {
 
 var btn = document.getElementById('addBtn');
 btn.onclick = function(){
-    //Validate()
+    substring()
+    //checkPhoneAvailability();
     contactList.addContact();
-  
 }
+
+
+var getContact = document.getElementById('getContact');
+getContact.onclick = function(){
+    contactList.getAllContacts();
+}
+
+
+function checkMail(){
+    
+}
+
+
+
+function validateEmail(email) 
+{
+  var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+  return re.test(email);
+}
+
+//function validateEmail(email) 
+// {
+//   var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+//   return re.test(email);
+// }
+
+
+function checkPhoneAvailability(){
+   
+    let phone2 = document.getElementById('phone')
+    if (phone2.value.length != 11 )
+     alert("the phone number should be 11 number")
+
+}
+
+
+function substring(){
+    let name2 = document.getElementById('name').value
+    let first = name2[0];
+    
+    var lastName = ""
+    var fulName = ""
+
+    for (let index = 0; index < name2.length; index++) {
+        if( name2[index] == " " ){
+            lastName =name2.substr(index , name2.length);
+            fulName = first+""+"."+lastName;
+        }
+    }
+    console.log("full name : " + fulName);
+    return fulName;
+}
+
 
 
 
